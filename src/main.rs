@@ -1,3 +1,5 @@
+use std::process::exit;
+
 use crate::cli::Args;
 use crate::conifg::Config;
 
@@ -13,6 +15,7 @@ fn main() {
 		println!("{}: v{}", crate_name!(), crate_version!());
 		println!("{}", crate_authors!());
 		println!("\n{}", crate_description!());
+		exit(0)
 	}
 
 	let config = Config::get(&args.bookmarks_file).unwrap(); // TODO: Handle unwrap better
