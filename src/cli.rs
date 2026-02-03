@@ -6,7 +6,7 @@ use clap::{ArgAction, Parser};
 #[derive(Clone, Parser)]
 pub(crate) struct Args {
 	/// Give the bookmark file you want used
-	pub(crate) bookmarks_file: PathBuf,
+	pub(crate) bookmarks_file: Option<PathBuf>,
 
 	/// Print version and exit
 	#[arg(short = 'V', long, action = ArgAction::SetTrue)]

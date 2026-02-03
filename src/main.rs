@@ -18,7 +18,12 @@ fn main() {
 		exit(0)
 	}
 
-	let config = Config::get(&args.bookmarks_file).unwrap(); // TODO: Handle unwrap better
+	if args.bookmarks_file.is_none() {
+		eprintln!("error: <bookmark_file> is required");
+		exit(1)
+	}
+
+	let config = Config::get(&args.bookmarks_file.unwrap()).unwrap(); // TODO: Handle unwrap better
 
 	println!("{:?}", config);
 }
