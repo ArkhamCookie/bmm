@@ -2,6 +2,14 @@
 name = "bmm"
 version = "0.1.0"
 edition = "2024"
+license = "AGPL-3.0-or-later"
+authors = ["ArkhamCookie <cargo@mail.arkhamcookie.com>"]
+description = "BookMark Manager (bmm) is a simple way to manage bookmarks from a TOML file."
+homepage = "https://github.com/ArkhamCookie/bmm"
+repository = "https://github.com/ArkhamCookie/bmm"
+readme = "README.md"
+keywords = ["bookmarks", "cli"]
+exclude = []
 
 [dependencies]
 clap = { version = "4.5.56", features = ["cargo", "derive"] }
