@@ -4,19 +4,26 @@ use std::path::PathBuf;
 use serde::{Deserialize, Serialize};
 use toml;
 
+/// A bookmark
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 pub struct Bookmark {
+	/// Bookmark link
 	pub link: String,
+	/// Bookmark name
 	pub name: Option<String>,
+	/// Bookmark description
 	pub description: Option<String>,
 }
 
+/// `bmm` bookmark file struct
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 pub struct Config {
+	/// Bookmarks in bookmarks file
 	pub bookmarks: Vec<Bookmark>,
 }
 
 impl Config {
+	/// Get config from a file
 	pub fn get(path: &PathBuf) -> Result<Self, String> {
 		let file = match fs::read_to_string(path) {
 			Ok(string) => string,
@@ -42,6 +49,7 @@ mod tests {
 
     use crate::conifg::{Bookmark, Config};
 
+	/// Test getting a single bookmark from a bookmark file
 	#[test]
 	fn basic_bookmark_from_file() {
 		let wanted_bookmark = Bookmark {
@@ -59,6 +67,7 @@ mod tests {
 		assert_eq!(wanted_config, config);
 	}
 
+	/// Test getting bookmarks from a bookmark file with different Options
 	#[test]
 	fn basic_bookmarks_from_file() {
 		let wanted_bookmark_1 = Bookmark {
