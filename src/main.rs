@@ -5,6 +5,8 @@ use crate::conifg::Config;
 
 use clap::{Parser, crate_authors, crate_description, crate_name, crate_version};
 
+use colored::Colorize;
+
 mod cli;
 mod conifg;
 
@@ -19,7 +21,11 @@ fn main() {
 	}
 
 	if args.bookmarks_file.is_none() {
-		eprintln!("error: <bookmark_file> is required");
+		let colored_error = String::from("error:").red().bold();
+		let colored_missing = String::from("<BOOKMARKS_FILE>").green();
+		let error_message = format!("{} {} is a required argument", colored_error, colored_missing);
+
+		eprintln!("{}", error_message);
 		exit(1)
 	}
 
