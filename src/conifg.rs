@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use toml;
 
 /// A bookmark
-#[derive(Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Bookmark {
 	/// Bookmark link
 	pub link: String,

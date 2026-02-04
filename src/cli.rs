@@ -1,5 +1,7 @@
 use std::path::PathBuf;
 
+use crate::tui::app::CurrentScreen;
+
 use clap::{ArgAction, Parser, Subcommand};
 
 /// `bmm` commands
@@ -32,4 +34,8 @@ pub(crate) struct Args {
 	/// Command to run
 	#[command(subcommand)]
 	pub(crate) command: Option<Command>,
+
+	/// Screen to start on in TUI mode
+	#[arg(short, long, value_enum)]
+	pub(crate) screen: Option<CurrentScreen>,
 }
