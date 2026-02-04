@@ -12,15 +12,11 @@ pub(crate) enum Command {
 		description: Option<String>,
 	},
 	/// Remove a bookmark
-	Rm {
-		bookmark: String,
-	},
+	Rm { bookmark: String },
 	/// List bookmarks
 	List {},
 	/// View a bookmark
-	View {
-		bookmark: String,
-	},
+	View { bookmark: String },
 }
 
 /// Commandline arguments for `bmm`

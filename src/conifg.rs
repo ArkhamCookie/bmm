@@ -45,9 +45,9 @@ impl Config {
 
 #[cfg(test)]
 mod tests {
-    use std::path::PathBuf;
+	use std::path::PathBuf;
 
-    use crate::conifg::{Bookmark, Config};
+	use crate::conifg::{Bookmark, Config};
 
 	/// Test getting a single bookmark from a bookmark file
 	#[test]
