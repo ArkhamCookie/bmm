@@ -34,5 +34,6 @@ pub(crate) struct Args {
 	pub(crate) version: bool,
 
 	/// Command to run
+	#[command(subcommand)]
 	pub(crate) command: Option<Command>,
 }
