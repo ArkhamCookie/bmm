@@ -31,6 +31,18 @@ pub(crate) enum CurrentScreen {
 	Help,
 }
 
+impl CurrentScreen {
+	#[allow(dead_code)]
+	pub(crate) fn description(&self) -> &'static str {
+		match self {
+			CurrentScreen::Default => "Default screen for viewing all bookmarks",
+			CurrentScreen::Editing => "Screen for editing a bookmark",
+			CurrentScreen::Exiting => "Screen for exiting `bmm` TUI mode",
+			CurrentScreen::Help => "Help screen for `bmm`",
+		}
+	}
+}
+
 /// `bmm` TUI App
 pub(crate) struct App {
 	/// Bookmarks being managed
