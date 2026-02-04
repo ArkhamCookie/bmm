@@ -1,7 +1,8 @@
 use std::process::exit;
 
-use crate::cli::Args;
+use crate::cli::{Args, Command};
 use crate::conifg::Config;
+use crate::tui::app::interactive;
 
 use clap::{Parser, crate_authors, crate_description, crate_name, crate_version};
 
@@ -9,6 +10,7 @@ use colored::Colorize;
 
 mod cli;
 mod conifg;
+mod tui;
 
 fn main() {
 	let args = Args::parse();
@@ -27,6 +29,24 @@ fn main() {
 
 		eprintln!("{}", error_message);
 		exit(1)
+	}
+
+	match &args.command {
+		Some(Command::Add { link, name, description }) => {
+			println!("{:?}", link);
+			println!("{:?}", name);
+			println!("{:?}", description);
+		},
+		Some(Command::Rm { bookmark }) => {
+			println!("{:?}", bookmark);
+		},
+		Some(Command::List {}) => {
+
+		},
+		Some(Command::View { bookmark }) => {
+			println!("{:?}", bookmark);
+		},
+		None => interactive(&args).expect("calling interactive mode for tui failed"),
 	}
 
 	let config = Config::get(&args.bookmarks_file.unwrap()).unwrap(); // TODO: Handle unwrap better
