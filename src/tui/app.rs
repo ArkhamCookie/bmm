@@ -10,6 +10,7 @@ use clap::ValueEnum;
 
 use ratatui::Terminal;
 use ratatui::backend::{Backend, CrosstermBackend};
+use ratatui::crossterm::event::KeyCode;
 use ratatui::crossterm::event::{
 	self, DisableMouseCapture, EnableMouseCapture, Event, KeyEventKind,
 };
@@ -75,6 +76,42 @@ fn run_app<B: Backend>(terminal: &mut Terminal<B>, app: &mut App) -> io::Result<
 		if let Event::Key(key) = event::read()? {
 			if key.kind == KeyEventKind::Release {
 				continue;
+			}
+
+			match app.current_screen {
+				CurrentScreen::Default => match key.code {
+					KeyCode::Char('q') => {
+						app.current_screen = CurrentScreen::Exiting
+					},
+					KeyCode::Char('?') => {
+						app.current_screen = CurrentScreen::Help;
+					}
+					_ => {},
+				},
+				CurrentScreen::Editing => match key.code {
+					KeyCode::Esc => {
+						app.current_screen = CurrentScreen::Default;
+					},
+					_ => {},
+				}
+				CurrentScreen::Exiting => match key.code {
+					KeyCode::Char('y') => {
+						return Ok(String::new())
+					},
+					KeyCode::Char('n') => {
+						app.current_screen = CurrentScreen::Default;
+					},
+					_ => {},
+				}
+				CurrentScreen::Help => match key.code {
+					KeyCode::Char('?') => {
+						app.current_screen = CurrentScreen::Default
+					},
+					KeyCode::Char('q') => {
+						app.current_screen = CurrentScreen::Exiting;
+					},
+					_ => {},
+				}
 			}
 		}
 	}
