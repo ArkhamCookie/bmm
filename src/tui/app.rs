@@ -34,6 +34,7 @@ pub(crate) enum CurrentScreen {
 }
 
 impl CurrentScreen {
+	/// Allows help messages for current screen option
 	#[allow(dead_code)]
 	pub(crate) fn description(&self) -> &'static str {
 		match self {
@@ -69,11 +70,17 @@ impl App {
 /// Run a `bmm` app
 fn run_app<B: Backend>(terminal: &mut Terminal<B>, app: &mut App) -> io::Result<String> {
 	loop {
-		todo!("start run_app fn")
+		terminal.draw(|f| ui(f, app)).unwrap(); // TODO: Handle unwrap better
+
+		if let Event::Key(key) = event::read()? {
+			if key.kind == KeyEventKind::Release {
+				continue;
+			}
+		}
 	}
 }
 
-///
+/// Start `bmm` in interactive TUI mode
 pub(crate) fn interactive(args: &Args) -> Result<(), Box<dyn error::Error>> {
 	enable_raw_mode()?;
 
