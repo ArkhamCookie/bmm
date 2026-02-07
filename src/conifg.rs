@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use toml;
 
 /// A bookmark
-#[derive(Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Bookmark {
 	/// Bookmark link
 	pub link: String,
@@ -45,9 +45,9 @@ impl Config {
 
 #[cfg(test)]
 mod tests {
-    use std::path::PathBuf;
+	use std::path::PathBuf;
 
-    use crate::conifg::{Bookmark, Config};
+	use crate::conifg::{Bookmark, Config};
 
 	/// Test getting a single bookmark from a bookmark file
 	#[test]

@@ -8,11 +8,13 @@ description = "BookMark Manager (bmm) is a simple way to manage bookmarks from a
 homepage = "https://github.com/ArkhamCookie/bmm"
 repository = "https://github.com/ArkhamCookie/bmm"
 readme = "README.md"
-keywords = ["bookmarks", "cli"]
+keywords = ["bookmarks", "cli", "tui"]
 exclude = []
 
 [dependencies]
 clap = { version = "4.5.56", features = ["cargo", "derive"] }
 colored = "3.1.1"
+ratatui = "0.30.0"
 serde = { version = "1.0.228", features = ["derive"] }
 toml = "0.9.11"
+tui-input = "0.15.0"
