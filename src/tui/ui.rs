@@ -54,4 +54,23 @@ pub(crate) fn ui(frame: &mut Frame, app: &App) {
 
 		frame.render_widget(exit_paragraph, area);
 	}
+
+	// Help screen
+	if let CurrentScreen::Help = &app.current_screen {
+		let popup_block = Block::default()
+			.title("Help Menu")
+			.style(Style::default().bg(Color::DarkGray));
+		let help_text = Text::styled(
+			"(?) to open/close the help menu
+(q) to quit
+(n) to create a new bookmark",
+			Style::default().fg(Color::Red),
+		);
+		let help_paragraph = Paragraph::new(help_text)
+			.block(popup_block)
+			.wrap(Wrap { trim: false });
+		let area = centered_rectange(60, 25, frame.area());
+
+		frame.render_widget(help_paragraph, area);
+	}
 }
