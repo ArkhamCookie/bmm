@@ -4,19 +4,21 @@ use std::io;
 use crate::cli::Args;
 use crate::conifg::Bookmark;
 use crate::conifg::Config;
+use crate::tui::ui::ui;
 
 use clap::ValueEnum;
 
 use ratatui::Terminal;
 use ratatui::backend::{Backend, CrosstermBackend};
-use ratatui::crossterm::event::{DisableMouseCapture, EnableMouseCapture};
+use ratatui::crossterm::event::{
+	self, DisableMouseCapture, EnableMouseCapture, Event, KeyEventKind,
+};
 use ratatui::crossterm::execute;
 use ratatui::crossterm::terminal::{
 	EnterAlternateScreen, LeaveAlternateScreen, disable_raw_mode, enable_raw_mode,
 };
 
 use tui_input::Input;
-use tui_input::backend::crossterm::EventHandler;
 
 /// Avaiable screens for `bmm` TUI
 #[derive(Clone, Copy, ValueEnum)]
