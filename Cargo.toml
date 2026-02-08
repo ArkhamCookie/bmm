@@ -12,7 +12,7 @@ keywords = ["bookmarks", "cli", "tui"]
 exclude = []
 
 [dependencies]
-clap = { version = "4.5.56", features = ["cargo", "derive"] }
+clap = { version = "4.5.57", features = ["cargo", "derive"] }
 colored = "3.1.1"
 ratatui = "0.30.0"
 serde = { version = "1.0.228", features = ["derive"] }
