@@ -50,7 +50,7 @@ fn main() {
 			println!("{:?}", bookmark);
 		}
 		Some(Command::List {}) => {
-			let file_config = FileConfig::get(&args.bookmarks_file.expect("couldn't find bookmark file")).expect("couldn't get FileConfig"); // TODO: Better error handling
+			let file_config = FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file")).expect("couldn't get FileConfig"); // TODO: Better error handling
 
 			for bookmark in file_config.bookmarks {
 				if bookmark.name.is_some() {
