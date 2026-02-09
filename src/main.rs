@@ -51,10 +51,9 @@ fn main() {
 		Some(Command::View { bookmark }) => {
 			println!("{:?}", bookmark);
 		}
-		None => interactive(&args).expect("calling interactive mode for tui failed"),
+		None => {
+			interactive(&args).expect("calling interactive mode for tui failed");
+			exit(0);
+		}
 	}
-
-	let config = Config::get(&args.bookmarks_file.unwrap()).unwrap(); // TODO: Handle unwrap better
-
-	println!("{:?}", config);
 }
