@@ -2,8 +2,7 @@ use std::error;
 use std::io;
 
 use crate::cli::Args;
-use crate::conifg::Bookmark;
-use crate::conifg::Config;
+use crate::conifg::{Bookmark, FileConfig};
 use crate::tui::ui::ui;
 
 use clap::ValueEnum;
@@ -127,7 +126,7 @@ pub(crate) fn interactive(args: &Args) -> Result<(), Box<dyn error::Error>> {
 	let mut terminal = Terminal::new(backend)?;
 
 	let bookmark_file = &args.bookmarks_file.as_ref().unwrap();
-	let config = Config::get(*bookmark_file)?;
+	let config = FileConfig::get(*bookmark_file)?;
 
 	let screen: CurrentScreen;
 	let screen_arg = args.screen;
