@@ -25,10 +25,10 @@ fn main() {
 	}
 
 	if args.bookmarks_file.is_none() {
-		let colored_error = String::from("error:").red().bold();
+		let colored_error = String::from("error").red().bold();
 		let colored_missing = String::from("<BOOKMARKS_FILE>").green();
 		let error_message = format!(
-			"{} {} is a required argument",
+			"{}: {} is a required argument",
 			colored_error, colored_missing
 		);
 
