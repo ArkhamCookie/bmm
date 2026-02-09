@@ -2,7 +2,7 @@ use std::error;
 use std::io;
 
 use crate::cli::Args;
-use crate::conifg::{Bookmark, FileConfig};
+use crate::config::{Bookmark, FileConfig};
 use crate::tui::ui::ui;
 
 use clap::ValueEnum;

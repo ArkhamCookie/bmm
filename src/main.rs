@@ -1,7 +1,7 @@
 use std::process::exit;
 
 use crate::cli::{Args, Command};
-use crate::conifg::FileConfig;
+use crate::config::FileConfig;
 use crate::tui::app::interactive;
 
 use clap::{Parser, crate_authors, crate_description, crate_name, crate_version};
@@ -11,7 +11,7 @@ use colored::Colorize;
 use terminal_link::Link;
 
 mod cli;
-mod conifg;
+mod config;
 mod tui;
 
 fn main() {
