@@ -74,7 +74,36 @@ fn main() {
 			exit(0);
 		}
 		Some(Command::View { bookmark }) => {
-			println!("{:?}", bookmark);
+			let file_config = FileConfig::get(&args.bookmarks_file.expect("couldn't find bookmark file")).expect("couldn't get FileConfig"); // TODO: Better error handling
+
+			for config_bookmark in file_config.bookmarks {
+				if config_bookmark.name.is_some() {
+					if *bookmark.to_ascii_lowercase() == config_bookmark.name.clone().unwrap().to_ascii_lowercase() {
+						let link = Link::new(&config_bookmark.link, &config_bookmark.link);
+
+						println!("Name: {}", config_bookmark.name.unwrap());
+						println!("Link: {}", link);
+
+						if config_bookmark.description.is_some() {
+							println!("Desciption: {}", config_bookmark.description.unwrap());
+						}
+
+						exit(0);
+					}
+				} else {
+					if *bookmark == config_bookmark.link {
+						let link = Link::new(&config_bookmark.link, &config_bookmark.link);
+
+						println!("Link: {}", link);
+
+						if config_bookmark.description.is_some() {
+							println!("Desciption: {}", config_bookmark.description.unwrap());
+						}
+
+						exit(0);
+					}
+				}
+			}
 		}
 		None => {
 			interactive(&args).expect("calling interactive mode for tui failed");
