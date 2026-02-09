@@ -64,6 +64,8 @@ fn main() {
 
 				if bookmark.description.is_some() {
 					println!(" — {}", bookmark.description.unwrap());
+				} else {
+					println!("");
 				}
 			}
 
