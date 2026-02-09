@@ -8,6 +8,8 @@ use clap::{Parser, crate_authors, crate_description, crate_name, crate_version};
 
 use colored::Colorize;
 
+use terminal_link::Link;
+
 mod cli;
 mod conifg;
 mod tui;
@@ -52,7 +54,10 @@ fn main() {
 
 			for bookmark in file_config.bookmarks {
 				if bookmark.name.is_some() {
-					print!("{}", bookmark.name.unwrap());
+					let name = bookmark.name.unwrap();
+					let link = Link::new(&name, &bookmark.link);
+
+					print!("{}", link);
 				} else {
 					print!("{}", bookmark.link);
 				}
