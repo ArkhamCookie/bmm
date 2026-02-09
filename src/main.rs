@@ -59,7 +59,9 @@ fn main() {
 
 					print!("{}", link);
 				} else {
-					print!("{}", bookmark.link);
+					let link = Link::new(&bookmark.link, &bookmark.link);
+
+					print!("{}", link);
 				}
 
 				if bookmark.description.is_some() {
