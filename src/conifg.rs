@@ -22,7 +22,7 @@ pub struct Config {
 	pub bookmarks: Vec<Bookmark>,
 }
 
-/// A compination of the Config and the file to read & write to
+/// A combination of the Config and the file to read & write to
 #[derive(Debug)]
 pub struct FileConfig {
 	pub bookmarks: Vec<Bookmark>,
