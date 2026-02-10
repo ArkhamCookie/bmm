@@ -1,7 +1,7 @@
 use std::process::exit;
 
 use crate::cli::{Args, Command};
-use crate::config::FileConfig;
+use crate::config::{Bookmark, FileConfig};
 use crate::tui::app::interactive;
 
 use clap::{Parser, crate_authors, crate_description, crate_name, crate_version};
@@ -42,15 +42,25 @@ fn main() {
 			name,
 			description,
 		}) => {
-			println!("{:?}", link);
-			println!("{:?}", name);
-			println!("{:?}", description);
+			let mut file_config =
+				FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file"))
+					.expect("couldn't get FileConfig"); // TODO: Better error handling
+
+			let new_bookmark = Bookmark {
+				name: name.clone(),
+				link: link.clone(),
+				description: description.clone(),
+			};
+
+			let _ = file_config.add(new_bookmark);
 		}
 		Some(Command::Rm { bookmark }) => {
 			println!("{:?}", bookmark);
 		}
 		Some(Command::List {}) => {
-			let file_config = FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file")).expect("couldn't get FileConfig"); // TODO: Better error handling
+			let file_config =
+				FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file"))
+					.expect("couldn't get FileConfig"); // TODO: Better error handling
 
 			for bookmark in file_config.bookmarks {
 				if bookmark.name.is_some() {
@@ -74,11 +84,15 @@ fn main() {
 			exit(0);
 		}
 		Some(Command::View { bookmark }) => {
-			let file_config = FileConfig::get(&args.bookmarks_file.expect("couldn't find bookmark file")).expect("couldn't get FileConfig"); // TODO: Better error handling
+			let file_config =
+				FileConfig::get(&args.bookmarks_file.expect("couldn't find bookmark file"))
+					.expect("couldn't get FileConfig"); // TODO: Better error handling
 
 			for config_bookmark in file_config.bookmarks {
 				if config_bookmark.name.is_some() {
-					if *bookmark.to_ascii_lowercase() == config_bookmark.name.clone().unwrap().to_ascii_lowercase() {
+					if *bookmark.to_ascii_lowercase()
+						== config_bookmark.name.clone().unwrap().to_ascii_lowercase()
+					{
 						let link = Link::new(&config_bookmark.link, &config_bookmark.link);
 
 						println!("Name: {}", config_bookmark.name.unwrap());
