@@ -3,6 +3,7 @@ use std::io::Write;
 use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
+
 use toml;
 
 /// A bookmark
