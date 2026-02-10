@@ -2,7 +2,7 @@ use ratatui::Frame;
 use ratatui::layout::{Constraint, Direction, Layout};
 use ratatui::style::{Color, Style};
 use ratatui::text::{Line, Span, Text};
-use ratatui::widgets::{Block, Borders, Paragraph, Wrap};
+use ratatui::widgets::{Block, Borders, List, ListItem, Paragraph, Wrap};
 
 use crate::tui::app::{App, CurrentScreen};
 use crate::tui::utils::centered_rectange;
@@ -28,7 +28,29 @@ pub(crate) fn ui(frame: &mut Frame, app: &App) {
 
 	frame.render_widget(title, chunks[0]);
 
-	// TODO: Render bookmarks...
+	let mut bookmarks = Vec::<ListItem>::new();
+
+	for bookmark in &app.bookmarks {
+		let mut content = String::new();
+
+		if bookmark.name.is_some() {
+			content.push_str(bookmark.name.clone().unwrap().as_str());
+			content.push_str(": ");
+		}
+
+		content.push_str(&bookmark.link);
+
+		if bookmark.description.is_some() {
+			content.push_str(" — ");
+			content.push_str(bookmark.description.clone().unwrap().as_str());
+		}
+
+		bookmarks.push(ListItem::new(Span::styled(content, Style::default())));
+	}
+
+	let list = List::new(bookmarks);
+
+	frame.render_widget(list, chunks[1]);
 
 	// TUI Footer Block
 	let footer_keys = Span::styled(
