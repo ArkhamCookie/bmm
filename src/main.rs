@@ -42,7 +42,9 @@ fn main() {
 			name,
 			description,
 		}) => {
-			let mut file_config = FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file")).expect("couldn't get FileConfig"); // TODO: Better error handling
+			let mut file_config =
+				FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file"))
+					.expect("couldn't get FileConfig"); // TODO: Better error handling
 
 			let new_bookmark = Bookmark {
 				name: name.clone(),
@@ -56,7 +58,9 @@ fn main() {
 			println!("{:?}", bookmark);
 		}
 		Some(Command::List {}) => {
-			let file_config = FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file")).expect("couldn't get FileConfig"); // TODO: Better error handling
+			let file_config =
+				FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file"))
+					.expect("couldn't get FileConfig"); // TODO: Better error handling
 
 			for bookmark in file_config.bookmarks {
 				if bookmark.name.is_some() {
@@ -80,11 +84,15 @@ fn main() {
 			exit(0);
 		}
 		Some(Command::View { bookmark }) => {
-			let file_config = FileConfig::get(&args.bookmarks_file.expect("couldn't find bookmark file")).expect("couldn't get FileConfig"); // TODO: Better error handling
+			let file_config =
+				FileConfig::get(&args.bookmarks_file.expect("couldn't find bookmark file"))
+					.expect("couldn't get FileConfig"); // TODO: Better error handling
 
 			for config_bookmark in file_config.bookmarks {
 				if config_bookmark.name.is_some() {
-					if *bookmark.to_ascii_lowercase() == config_bookmark.name.clone().unwrap().to_ascii_lowercase() {
+					if *bookmark.to_ascii_lowercase()
+						== config_bookmark.name.clone().unwrap().to_ascii_lowercase()
+					{
 						let link = Link::new(&config_bookmark.link, &config_bookmark.link);
 
 						println!("Name: {}", config_bookmark.name.unwrap());

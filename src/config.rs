@@ -38,7 +38,7 @@ impl FileConfig {
 			Err(error) => {
 				eprintln!("ERROR: {}", error);
 				todo!()
-			},
+			}
 		};
 
 		let toml: Config = toml::from_str(&file).unwrap(); // TODO: Better error handling

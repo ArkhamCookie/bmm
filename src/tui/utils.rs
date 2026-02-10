@@ -5,9 +5,9 @@ pub(crate) fn centered_rectange(percent_x: u16, percent_y: u16, r: Rect) -> Rect
 	let popout_layout = Layout::default()
 		.direction(Direction::Vertical)
 		.constraints([
-			Constraint::Percentage((100 - percent_y) /2),
+			Constraint::Percentage((100 - percent_y) / 2),
 			Constraint::Percentage(percent_y),
-			Constraint::Percentage((100 - percent_y) /2),
+			Constraint::Percentage((100 - percent_y) / 2),
 		])
 		.split(r);
 

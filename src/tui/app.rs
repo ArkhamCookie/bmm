@@ -79,38 +79,32 @@ fn run_app<B: Backend>(terminal: &mut Terminal<B>, app: &mut App) -> io::Result<
 
 			match app.current_screen {
 				CurrentScreen::Default => match key.code {
-					KeyCode::Char('q') => {
-						app.current_screen = CurrentScreen::Exiting
-					},
+					KeyCode::Char('q') => app.current_screen = CurrentScreen::Exiting,
 					KeyCode::Char('?') => {
 						app.current_screen = CurrentScreen::Help;
 					}
-					_ => {},
+					_ => {}
 				},
 				CurrentScreen::Editing => match key.code {
 					KeyCode::Esc => {
 						app.current_screen = CurrentScreen::Default;
-					},
-					_ => {},
-				}
+					}
+					_ => {}
+				},
 				CurrentScreen::Exiting => match key.code {
-					KeyCode::Char('y') => {
-						return Ok(String::new())
-					},
+					KeyCode::Char('y') => return Ok(String::new()),
 					KeyCode::Char('n') => {
 						app.current_screen = CurrentScreen::Default;
-					},
-					_ => {},
-				}
+					}
+					_ => {}
+				},
 				CurrentScreen::Help => match key.code {
-					KeyCode::Char('?') => {
-						app.current_screen = CurrentScreen::Default
-					},
+					KeyCode::Char('?') => app.current_screen = CurrentScreen::Default,
 					KeyCode::Char('q') => {
 						app.current_screen = CurrentScreen::Exiting;
-					},
-					_ => {},
-				}
+					}
+					_ => {}
+				},
 			}
 		}
 	}
