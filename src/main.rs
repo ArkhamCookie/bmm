@@ -1,7 +1,7 @@
 use std::process::exit;
 
 use crate::cli::{Args, Command};
-use crate::config::FileConfig;
+use crate::config::{Bookmark, FileConfig};
 use crate::tui::app::interactive;
 
 use clap::{Parser, crate_authors, crate_description, crate_name, crate_version};
@@ -42,9 +42,15 @@ fn main() {
 			name,
 			description,
 		}) => {
-			println!("{:?}", link);
-			println!("{:?}", name);
-			println!("{:?}", description);
+			let mut file_config = FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file")).expect("couldn't get FileConfig"); // TODO: Better error handling
+
+			let new_bookmark = Bookmark {
+				name: name.clone(),
+				link: link.clone(),
+				description: description.clone(),
+			};
+
+			let _ = file_config.add(new_bookmark);
 		}
 		Some(Command::Rm { bookmark }) => {
 			println!("{:?}", bookmark);
