@@ -46,6 +46,46 @@ impl FileConfig {
 			file: path.clone(),
 		})
 	}
+
+	pub fn add(&mut self, new_bookmark: Bookmark) -> Result<&mut Self, String> {
+		self.bookmarks.push(new_bookmark);
+
+		let mut contents = String::new();
+
+		for bookmark in &self.bookmarks {
+			contents.push_str("[[bookmarks]]\n");
+			contents.push_str("link = \"");
+			contents.push_str(&bookmark.link);
+			contents.push_str("\"\n");
+
+			if bookmark.name.is_some() {
+				contents.push_str("name = \"");
+				contents.push_str(bookmark.name.clone().unwrap().as_str());
+				contents.push_str("\"\n");
+			}
+
+			if bookmark.description.is_some() {
+				contents.push_str("description = \"");
+				contents.push_str(bookmark.description.clone().unwrap().as_str());
+				contents.push_str("\"\n");
+			}
+
+			contents.push('\n');
+		}
+
+		let mut file = File::create(&self.file).expect("couldn't get file");
+
+		let write_result = file.write(contents.as_bytes());
+
+		if write_result.is_err() {
+			let error = write_result.unwrap_err();
+
+			eprintln!("ERROR: {}", error);
+			return Err(String::from("write error"));
+		}
+
+		Ok(self)
+	}
 }
 
 #[cfg(test)]
