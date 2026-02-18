@@ -88,6 +88,18 @@ impl FileConfig {
 
 		Ok(self)
 	}
+
+	pub fn rm(&mut self, removed_bookmark: &String) -> Result<&mut Self, String> {
+		for bookmark in &self.bookmarks {
+			if let Some(name) = &bookmark.name {
+				if name.to_ascii_lowercase() == removed_bookmark.to_ascii_lowercase() {
+					println!("{:?}", bookmark);
+				}
+			}
+		}
+
+		Ok(self)
+	}
 }
 
 #[cfg(test)]

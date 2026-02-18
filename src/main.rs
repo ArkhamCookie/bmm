@@ -55,7 +55,11 @@ fn main() {
 			let _ = file_config.add(new_bookmark);
 		}
 		Some(Command::Rm { bookmark }) => {
-			println!("{:?}", bookmark);
+			let mut file_config =
+				FileConfig::get(&args.bookmarks_file.expect("couldn't get bookmark file"))
+					.expect("couldn't get FileConfig"); // TODO: Better error handling
+
+			let _ = file_config.rm(bookmark);
 		}
 		Some(Command::List {}) => {
 			let file_config =
