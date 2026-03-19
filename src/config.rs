@@ -4,7 +4,7 @@ use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
 
-use toml;
+use toml_edit;
 
 /// A bookmark
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -41,7 +41,7 @@ impl FileConfig {
 			}
 		};
 
-		let toml: Config = toml::from_str(&file).unwrap(); // TODO: Better error handling
+		let toml: Config = toml_edit::de::from_str(&file).unwrap(); // TODO: Better error handling
 
 		Ok(Self {
 			bookmarks: toml.bookmarks,
@@ -84,6 +84,20 @@ impl FileConfig {
 
 			eprintln!("ERROR: {}", error);
 			return Err(String::from("write error"));
+		}
+
+		Ok(self)
+	}
+
+	pub fn rm(&mut self, removed_bookmark: &String) -> Result<&mut Self, String> {
+		for bookmark in &self.bookmarks {
+			if let Some(name) = &bookmark.name {
+				if name.to_ascii_lowercase() == removed_bookmark.to_ascii_lowercase() {
+					println!("{:?}", bookmark);
+
+					todo!("rm feature is not yet coded")
+				}
+			}
 		}
 
 		Ok(self)
