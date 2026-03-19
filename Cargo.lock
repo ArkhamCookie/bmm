@@ -1423,8 +1423,6 @@ version = "0.25.5+spec-1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ca1a40644a28bce036923f6a431df0b34236949d111cc07cb6dca830c9ef2e1"
 dependencies = [
- "anstream",
- "anstyle",
  "indexmap",
  "serde_core",
  "serde_spanned",
@@ -1440,8 +1438,6 @@ version = "1.0.10+spec-1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7df25b4befd31c4816df190124375d5a20c6b6921e2cad937316de3fccd63420"
 dependencies = [
- "anstream",
- "anstyle",
  "winnow",
 ]
 
