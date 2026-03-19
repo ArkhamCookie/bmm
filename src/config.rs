@@ -94,6 +94,8 @@ impl FileConfig {
 			if let Some(name) = &bookmark.name {
 				if name.to_ascii_lowercase() == removed_bookmark.to_ascii_lowercase() {
 					println!("{:?}", bookmark);
+
+					todo!("rm feature is not yet coded")
 				}
 			}
 		}
