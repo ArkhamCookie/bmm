@@ -4,7 +4,7 @@ use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
 
-use toml;
+use toml_edit;
 
 /// A bookmark
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -41,7 +41,7 @@ impl FileConfig {
 			}
 		};
 
-		let toml: Config = toml::from_str(&file).unwrap(); // TODO: Better error handling
+		let toml: Config = toml_edit::de::from_str(&file).unwrap(); // TODO: Better error handling
 
 		Ok(Self {
 			bookmarks: toml.bookmarks,
